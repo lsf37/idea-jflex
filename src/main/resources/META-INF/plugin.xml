@@ -1,0 +1,43 @@
+<idea-plugin version="2">
+    <name>JFlex Support</name>
+    <version>1.6.1</version>
+    <vendor>Alexey Efimov, Max Ishchenko, Jan Dolecek, Steve Rowe</vendor>
+    <change-notes><![CDATA[
+    1.6.1 - Updated for JFlex 1.6.1, .jflex extension added to JFlex file type. (Steve Rowe)<br>
+
+    1.5.1 - Updated for IDEA 11, components refactored to extensions. (Jan Dolecek)<br>
+
+    1.5.0 - Updated for IDEA 10, not using jflex.bat or jflex.sh anymore, executing JFlex.Main directly instead.<br>
+
+    1.4.1 - Added support for disable compiler<br>
+
+    1.4.0 - Updated for IDEA 9.<br>
+
+    1.3.0 - Updated for IDEA 8.<br>
+
+    1.2.0 - Embedded Java code support, "Find Usages" for macroses and states, flex files can be excluded from
+    compile, "File not generated" bug fixed, settings GUI fixed.<br>
+    ]]>
+    </change-notes>
+
+    <description>Enables JFlex support in IntelliJ IDEA.</description>
+    <resource-bundle>de.jflex.ide.idea.util.JFlexBundle</resource-bundle>
+
+    <idea-version since-build="111.167"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable implementation="de.jflex.ide.idea.options.JFlexConfigurable"/>
+        <colorSettingsPage implementation="de.jflex.ide.idea.editor.colors.JFlexColorPage"/>
+        <lang.parserDefinition language="JFlex" implementationClass="de.jflex.ide.idea.parser.JFlexParserDefinition"/>
+        <lang.documentationProvider language="JFlex" implementationClass="de.jflex.ide.idea.JFlexDocumentationProvider"/>
+        <lang.findUsagesProvider language="JFlex" implementationClass="de.jflex.ide.idea.JFlexFindUsagesProvider"/>
+        <lang.commenter language="JFlex" implementationClass="de.jflex.ide.idea.JFlexCommenter"/>
+        <annotator language="JFlex" implementationClass="de.jflex.ide.idea.validation.JFlexAnnotatingVisitor"/>
+        <languageInjector implementation="de.jflex.ide.idea.injection.JFlexJavaInjector" />
+        <fileTypeFactory implementation="de.jflex.ide.idea.fileTypes.JFlexFileTypeFactory" />
+        <compilerFactory implementation="de.jflex.ide.idea.compiler.JFlexCompilerFactory" />
+
+        <applicationService serviceInterface="de.jflex.ide.idea.options.JFlexSettings"
+                            serviceImplementation="de.jflex.ide.idea.options.JFlexSettings" />
+    </extensions>
+</idea-plugin>

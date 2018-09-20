@@ -1,0 +1,51 @@
+package de.jflex.ide.idea;
+
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.documentation.DocumentationProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
+import de.jflex.ide.idea.psi.JFlexMacroDefinition;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
+/**
+ * @author Max
+*/
+public class JFlexDocumentationProvider implements DocumentationProvider {
+
+    @Nullable
+    public String getQuickNavigateInfo(PsiElement element) {
+        return null;
+    }
+
+    @Nullable
+    public List<String> getUrlFor(PsiElement element, PsiElement originalElement) {
+        return null;
+    }
+
+    @Nullable
+    public String generateDoc(PsiElement element, PsiElement originalElement) {
+        if (element instanceof JFlexMacroDefinition) {
+            ASTNode astNode = element.getNode();
+            ASTNode regexp = astNode != null ? astNode.findChildByType(JFlexElementTypes.REGEXP) : null;
+            return regexp != null ? regexp.getText() : "No regexp found.";
+        }
+        return null;
+    }
+
+    @Nullable
+    public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
+        return null;
+    }
+
+    @Nullable
+    public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
+        return null;
+    }
+
+    @Nullable
+    public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
+        return null;
+    }
+}
